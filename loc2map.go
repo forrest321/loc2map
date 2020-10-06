@@ -61,7 +61,7 @@ func getURL(lat, lng float64) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fmt.Printf("got url: %s", u.String())
+	//fmt.Printf("got url: %s", u.String())
 	return u.String(), nil
 }
 
