@@ -14,9 +14,27 @@ import (
 	"github.com/chromedp/chromedp"
 )
 
+// Loc2ByteArrayOfMapImage accepts a lat and long, and returns a byte
+// array containing the image data of the resulting google map,
+// or nil and a relevant error
+func Loc2ByteArrayOfMapImage(lat, lng float64) ([]byte, error) {
+	// Format the URL with the lat, lng, and api key
+	mapUrl, err := getURL(lat, lng)
+	if err != nil {
+		return nil, err
+	}
+	// Get the screenshot image data
+	buf, err := getMapScreen(mapUrl)
+	if err != nil {
+		return nil, err
+	}
+
+	return buf, nil
+}
+
 // Convert accepts a lat, lng, and filepath (and name ending with .png)
 // and saves a map in the specified file
-func Convert(lat, lng float64, filePath string) error {
+func Loc2Map(lat, lng float64, filePath string) error {
 	if filePath == "" {
 		return errors.New("filepath is required")
 	}
